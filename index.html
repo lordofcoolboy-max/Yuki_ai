@@ -131,10 +131,8 @@ function addMessage(text, type) {
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
 }
-
 async function sendMessage() {
   const message = input.value.trim();
-
   if (!message) return;
 
   addMessage(message, "user");
@@ -142,13 +140,20 @@ async function sendMessage() {
   sendButton.disabled = true;
   statusText.textContent = "YUKI is thinking...";
 
+  const history = JSON.parse(
+    localStorage.getItem("yukiHistory") || "[]"
+  );
+
   try {
     const response = await fetch("/api/chat", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ message })
+      body: JSON.stringify({
+        message,
+        history: history.slice(-10)
+      })
     });
 
     const data = await response.json();
@@ -157,8 +162,20 @@ async function sendMessage() {
       throw new Error(data.error || "AI request failed");
     }
 
-    addMessage(data.reply || "No reply received.", "bot");
-    speakReply(data.reply || "No reply received.");
+    const reply = data.reply || "No reply received.";
+
+    history.push(
+      { role: "user", content: message },
+      { role: "assistant", content: reply }
+    );
+
+    localStorage.setItem(
+      "yukiHistory",
+      JSON.stringify(history.slice(-10))
+    );
+
+    addMessage(reply, "bot");
+    speakReply(reply);
     statusText.textContent = "Ready";
 
   } catch (error) {
@@ -168,6 +185,7 @@ async function sendMessage() {
 
   sendButton.disabled = false;
 }
+
 
 input.addEventListener("keydown", function(event) {
   if (event.key === "Enter") sendMessage();
