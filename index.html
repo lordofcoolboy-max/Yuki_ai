@@ -158,6 +158,7 @@ async function sendMessage() {
     }
 
     addMessage(data.reply || "No reply received.", "bot");
+    speakReply(data.reply || "No reply received.");
     statusText.textContent = "Ready";
 
   } catch (error) {
@@ -171,6 +172,45 @@ async function sendMessage() {
 input.addEventListener("keydown", function(event) {
   if (event.key === "Enter") sendMessage();
 });
+  
+  function startVoice() {
+  const SpeechRecognition =
+    window.SpeechRecognition || window.webkitSpeechRecognition;
+
+  if (!SpeechRecognition) {
+    alert("Voice recognition is not supported in this browser. Try Chrome.");
+    return;
+  }
+
+  const recognition = new SpeechRecognition();
+  recognition.lang = "ta-IN";
+  recognition.interimResults = false;
+
+  statusText.textContent = "Listening...";
+
+  recognition.onresult = function(event) {
+    input.value = event.results[0][0].transcript;
+    sendMessage();
+  };
+
+  recognition.onerror = function() {
+    statusText.textContent = "Voice error. Try again.";
+  };
+
+  recognition.onend = function() {
+    if (statusText.textContent === "Listening...") {
+      statusText.textContent = "Ready";
+    }
+  };
+
+  recognition.start();
+}
+
+function speakReply(text) {
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = "ta-IN";
+  window.speechSynthesis.speak(speech);
+}
 </script>
 
 </body>
