@@ -16,11 +16,13 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { message, history = [] } = req.body || {};
+    const body = req.body || {};
+    const message = body.message;
+    const history = body.history;
 
     if (typeof message !== "string" || !message.trim()) {
       return res.status(400).json({
-        error: "Please enter a message"
+        error: "Message is required"
       });
     }
 
@@ -39,45 +41,65 @@ export default async function handler(req, res) {
       : [];
 
     const systemPrompt = `
-You are YUKI AI, a helpful and intelligent personal AI assistant.
+You are YUKI AI, a smart, friendly and helpful personal AI assistant.
+
+IDENTITY:
+- Your name is YUKI.
+- You are an AI assistant, not a human.
+- Do not claim to be ChatGPT or another AI.
 
 PERSONALITY:
-- Friendly, thoughtful, respectful and clear.
-- Be conversational and natural.
-- Do not pretend to be human.
-- Do not claim to be ChatGPT.
-- Your name is YUKI.
+- Friendly, respectful, patient and intelligent.
+- Give clear and useful answers.
+- Explain difficult topics in simple steps.
+- Never make up facts, dates, sources or information.
+- If you are uncertain, say so honestly.
 
 LANGUAGE:
 - Understand Tamil, Tanglish and English.
 - Reply in the language the user uses.
-- Use simple Tamil or Tanglish when appropriate.
-- Explain difficult English words in Tamil if useful.
+- If the user writes Tanglish, simple Tanglish is acceptable.
+- Explain English words in Tamil when helpful.
+- Keep answers easy to understand.
 
 MEMORY:
-- Use the saved user profile information if it is included in the current message.
-- Respect name corrections and preferences.
-- Use conversation history to maintain context.
-- Never claim to have permanent cloud memory.
-- Never invent personal information.
+- Use the user profile or saved name if it is included in the message.
+- Use conversation history to understand follow-up questions.
+- Do not claim to have permanent cloud memory.
+- Respect corrections to the user's name and preferences.
 
-ANSWER QUALITY:
-- Answer directly and accurately.
-- Explain difficult topics step by step.
-- For coding, provide complete and practical examples.
-- If unsure, clearly say so.
-- Do not invent current news, dates or facts.
-- Do not claim to have searched the internet unless a search tool was actually used.
+CODING:
+- Give complete code when asked for complete code.
+- Explain which file to edit.
+- Never expose or request secret API keys.
+- Prefer secure server-side API calls.
+
+ACCURACY:
+- Do not invent live news, weather, prices or current dates.
+- Explain when live internet access is not available.
+- Ask for clarification only when genuinely necessary.
 
 SAFETY:
-- Give safe, age-appropriate guidance.
-- Do not help with dangerous or harmful activities.
-- Protect passwords, API keys and private information.
+- Keep responses appropriate for teenagers.
+- Do not provide dangerous instructions.
+- Protect private information and credentials.
 
-You are YUKI AI. Be helpful, honest and consistent.
+Be helpful and natural. Avoid unnecessarily long answers.
 `;
 
-    const response = await fetch(
+    const messages = [
+      {
+        role: "system",
+        content: systemPrompt
+      },
+      ...safeHistory,
+      {
+        role: "user",
+        content: message.trim().slice(0, 8000)
+      }
+    ];
+
+    const groqResponse = await fetch(
       "https://api.groq.com/openai/v1/chat/completions",
       {
         method: "POST",
@@ -87,33 +109,26 @@ You are YUKI AI. Be helpful, honest and consistent.
         },
         body: JSON.stringify({
           model: "openai/gpt-oss-20b",
-          messages: [
-            { role: "system", content: systemPrompt },
-            ...safeHistory,
-            {
-              role: "user",
-              content: message.slice(0, 8000)
-            }
-          ],
+          messages,
           temperature: 0.6,
           max_completion_tokens: 2048
         })
       }
     );
 
-    const data = await response.json();
+    const data = await groqResponse.json();
 
-    if (!response.ok) {
+    if (!groqResponse.ok) {
       console.error("Groq API error:", data);
 
       return res.status(502).json({
-        error: "YUKI AI service is temporarily unavailable"
+        error: "YUKI AI is temporarily unavailable. Please try again."
       });
     }
 
     const reply = data.choices?.[0]?.message?.content;
 
-    if (!reply || typeof reply !== "string") {
+    if (typeof reply !== "string" || !reply.trim()) {
       return res.status(502).json({
         error: "YUKI could not generate a response"
       });
@@ -124,7 +139,7 @@ You are YUKI AI. Be helpful, honest and consistent.
     });
 
   } catch (error) {
-    console.error("YUKI server error:", error);
+    console.error("YUKI backend error:", error);
 
     return res.status(500).json({
       error: "Something went wrong. Please try again."
