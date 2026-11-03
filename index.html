@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,128 +14,146 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #090b14;
-  color: #f5f5ff;
+  background:
+    radial-gradient(circle at top, #292052, #0a0b16 55%);
+  color: #fff;
   display: flex;
   flex-direction: column;
   height: 100dvh;
+  overflow: hidden;
 }
 
 header {
-  padding: 18px 12px;
+  padding: 20px 12px 15px;
   text-align: center;
-  background: #131629;
-  border-bottom: 1px solid #292e49;
-  box-shadow: 0 4px 20px #0005;
+  background: rgba(22, 19, 43, 0.85);
+  border-bottom: 1px solid #51447d;
+  box-shadow: 0 5px 25px #0006;
 }
 
 header h2 {
   margin: 0;
-  color: #a99aff;
-  font-size: 25px;
-  letter-spacing: 1px;
+  font-size: 28px;
+  letter-spacing: 2px;
+  color: #c3a8ff;
+  text-shadow: 0 0 18px #9470ff;
 }
 
 header p {
-  margin: 6px 0 12px;
-  color: #a5a9c2;
+  margin: 7px 0 14px;
   font-size: 13px;
+  color: #c4bddb;
 }
 
 header button {
-  padding: 10px 15px;
   margin: 4px;
-  border-radius: 20px;
-  background: #252b48;
-  border: 1px solid #56517f;
+  padding: 10px 15px;
+  border-radius: 22px;
+  border: 1px solid #7460a9;
+  background: #292343;
   color: white;
+  font-weight: bold;
 }
 
 #chat {
   flex: 1;
   overflow-y: auto;
-  padding: 18px;
+  padding: 18px 14px;
   scroll-behavior: smooth;
 }
 
 .message {
-  padding: 13px 16px;
-  margin: 12px 0;
-  border-radius: 18px;
-  max-width: 85%;
+  padding: 14px 17px;
+  margin: 13px 0;
+  max-width: 86%;
+  border-radius: 19px;
   line-height: 1.6;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  box-shadow: 0 4px 12px #0003;
+  box-shadow: 0 5px 18px #0004;
 }
 
 .user {
-  background: linear-gradient(135deg, #7161ef, #5140bd);
   margin-left: auto;
+  background: linear-gradient(135deg, #a477ff, #6544d6);
+  border: 1px solid #b69aff;
   border-bottom-right-radius: 5px;
 }
 
 .bot {
-  background: #1c2236;
-  border: 1px solid #303955;
   margin-right: auto;
+  background: rgba(35, 32, 58, 0.95);
+  border: 1px solid #514674;
   border-bottom-left-radius: 5px;
 }
 
 #status {
-  color: #a99aff;
-  padding: 7px 15px;
+  padding: 8px 16px;
+  color: #c3a8ff;
   font-size: 12px;
+  background: rgba(15, 13, 30, 0.8);
 }
 
 footer {
   display: flex;
+  align-items: center;
   gap: 8px;
   padding: 13px;
-  background: #131629;
-  border-top: 1px solid #292e49;
+  background: rgba(22, 19, 43, 0.96);
+  border-top: 1px solid #51447d;
 }
 
 input {
   flex: 1;
   min-width: 0;
-  padding: 14px;
-  border: 1px solid #41496c;
+  padding: 15px;
   border-radius: 25px;
-  background: #20263b;
+  border: 1px solid #66558f;
+  background: #211d38;
   color: white;
   outline: none;
   font-size: 14px;
 }
 
-input:focus {
-  border-color: #9b8cff;
+input::placeholder {
+  color: #aaa0c4;
 }
 
-footer button {
-  border: 0;
-  border-radius: 25px;
-  padding: 0 17px;
-  background: linear-gradient(135deg, #917dff, #6651dc);
-  color: white;
-  font-weight: bold;
+input:focus {
+  border-color: #bd9aff;
+  box-shadow: 0 0 12px #8960d866;
 }
 
 button {
   cursor: pointer;
+  transition: 0.2s;
 }
 
 button:active {
-  transform: scale(0.96);
+  transform: scale(0.94);
 }
 
-button:disabled {
+footer button {
+  border: 0;
+  border-radius: 24px;
+  padding: 13px 16px;
+  color: white;
+  font-weight: bold;
+  background: linear-gradient(135deg, #a477ff, #6844d6);
+  box-shadow: 0 3px 15px #8056e955;
+}
+
+footer button:disabled {
   opacity: 0.5;
 }
 
 @media (max-width: 480px) {
   header {
-    padding: 15px 8px;
+    padding: 16px 8px;
+  }
+
+  header h2 {
+    font-size: 25px;
   }
 
   #chat {
@@ -142,20 +161,28 @@ button:disabled {
   }
 
   .message {
-    max-width: 90%;
+    max-width: 91%;
   }
 
   footer {
     padding: 10px;
+    gap: 6px;
+  }
+
+  footer button {
+    padding: 13px 12px;
   }
 }
 </style>
+</head>
+
+<body>
 
 <header>
   <h2>✨ YUKI AI</h2>
   <p>Your Personal AI Assistant</p>
-  <button id="newChat" onclick="newChat()">+ New Chat</button>
-  <button id="historyBtn" onclick="showHistory()">📚 Chat History</button>
+  <button id="newChat" onclick="newChat()">＋ New Chat</button>
+  <button id="historyBtn" onclick="showHistory()">📚 History</button>
 </header>
 
 <div id="chat">
@@ -169,7 +196,7 @@ button:disabled {
 <footer>
   <input id="message" placeholder="Ask YUKI anything..." />
   <button onclick="startVoice()">🎤</button>
-  <button id="send" onclick="sendMessage()">Send</button>
+  <button id="send" onclick="sendMessage()">➤</button>
 </footer>
 
 <script>
@@ -185,6 +212,7 @@ function addMessage(text, type) {
   chat.appendChild(div);
   chat.scrollTop = chat.scrollHeight;
 }
+
 async function sendMessage() {
   const message = input.value.trim();
   if (!message) return;
@@ -240,17 +268,16 @@ async function sendMessage() {
   sendButton.disabled = false;
 }
 
-
 input.addEventListener("keydown", function(event) {
   if (event.key === "Enter") sendMessage();
 });
-  
-  function startVoice() {
+
+function startVoice() {
   const SpeechRecognition =
     window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    alert("Voice recognition is not supported in this browser. Try Chrome.");
+    alert("Voice recognition is not supported. Try Chrome.");
     return;
   }
 
@@ -283,48 +310,62 @@ function speakReply(text) {
   speech.lang = "ta-IN";
   window.speechSynthesis.speak(speech);
 }
-  window.addEventListener("load", function () {
+
+window.addEventListener("load", function() {
   const history = JSON.parse(
     localStorage.getItem("yukiHistory") || "[]"
   );
 
-  history.forEach(function (item) {
-    if (
-      item &&
-      ["user", "assistant"].includes(item.role) &&
-      typeof item.content === "string"
-    ) {
-      addMessage(
-        item.content,
-        item.role === "user" ? "user" : "bot"
-      );
-    }
-  });
+  if (history.length > 0) {
+    chat.innerHTML = "";
+
+    history.forEach(function(item) {
+      if (
+        item &&
+        ["user", "assistant"].includes(item.role) &&
+        typeof item.content === "string"
+      ) {
+        addMessage(
+          item.content,
+          item.role === "user" ? "user" : "bot"
+        );
+      }
+    });
+  }
 });
 
-  function newChat() {
+function newChat() {
   const confirmNew = confirm("Start a new chat?");
   if (!confirmNew) return;
 
-  const history = JSON.parse(localStorage.getItem("yukiHistory") || "[]");
+  const history = JSON.parse(
+    localStorage.getItem("yukiHistory") || "[]"
+  );
 
   if (history.length > 0) {
-    const chats = JSON.parse(localStorage.getItem("yukiArchivedChats") || "[]");
+    const chats = JSON.parse(
+      localStorage.getItem("yukiArchivedChats") || "[]"
+    );
 
     chats.push({
       date: new Date().toLocaleString(),
       messages: history
     });
 
-    localStorage.setItem("yukiArchivedChats", JSON.stringify(chats));
+    localStorage.setItem(
+      "yukiArchivedChats",
+      JSON.stringify(chats)
+    );
   }
 
   localStorage.removeItem("yukiHistory");
   chat.innerHTML = "";
+
   addMessage("Hello! I'm YUKI AI. How can I help you?", "bot");
   statusText.textContent = "Ready";
 }
-  function showHistory() {
+
+function showHistory() {
   const chats = JSON.parse(
     localStorage.getItem("yukiArchivedChats") || "[]"
   );
@@ -344,7 +385,11 @@ function speakReply(text) {
 
   const number = Number(choice);
 
-  if (!Number.isInteger(number) || number < 1 || number > chats.length) {
+  if (
+    !Number.isInteger(number) ||
+    number < 1 ||
+    number > chats.length
+  ) {
     return;
   }
 
@@ -358,7 +403,7 @@ function speakReply(text) {
   });
 
   statusText.textContent = "Viewing old chat";
-  }
+}
 </script>
 
 </body>
