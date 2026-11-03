@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YUKI AI</title>
+<style>
+*{box-sizing:border-box}
+body{
+ margin:0;background:#0b1020;color:white;
+ font-family:Arial,sans-serif;
+ display:flex;justify-content:center;
+ min-height:100vh;
+}
+.app{width:100%;max-width:600px;padding:20px;display:flex;flex-direction:column}
+header{text-align:center;padding:22px}
+.logo{font-size:38px;font-weight:bold;color:#a78bfa}
+header p{color:#aaa}
+#chat{flex:1;min-height:55vh;overflow:auto;padding:12px}
+.msg{padding:13px 16px;margin:12px 0;border-radius:16px;max-width:85%;line-height:1.5}
+.bot{background:#202943}
+.user{background:#6941c6;margin-left:auto}
+.controls{display:flex;gap:8px}
+input{flex:1;min-width:0;padding:15px;border-radius:14px;border:1px solid #444;background:#182138;color:white;font-size:16px}
+button{border:0;border-radius:12px;padding:13px;background:#8055e8;color:white;font-size:16px}
+</style>
+</head>
+<body>
+<div class="app">
+<header>
+<div class="logo">✦ YUKI AI</div>
+<p>Your Personal AI Assistant</p>
+</header>
+<div id="chat">
+<div class="msg bot">Hello! I am YUKI AI. How can I help you?</div>
+</div>
+<div class="controls">
+<input id="message" placeholder="Ask YUKI anything...">
+<button onclick="sendMessage()">Send</button>
+</div>
+</div>
+<script>
+function sendMessage(){
+ const input=document.getElementById("message");
+ const chat=document.getElementById("chat");
+ const value=input.value.trim();
+ if(!value)return;
+ const msg=document.createElement("div");
+ msg.className="msg user";
+ msg.textContent=value;
+ chat.appendChild(msg);
+ input.value="";
+ chat.scrollTop=chat.scrollHeight;
+ const reply=document.createElement("div");
+ reply.className="msg bot";
+ reply.textContent="YUKI AI is getting ready. Real AI connection will be added next!";
+ chat.appendChild(reply);
+ chat.scrollTop=chat.scrollHeight;
+}
+</script>
+</body>
+</html>
