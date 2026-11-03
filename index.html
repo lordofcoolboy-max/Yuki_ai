@@ -6,98 +6,150 @@
 <title>YUKI AI</title>
 
 <style>
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: #10111b;
-  color: white;
+  background: #090b14;
+  color: #f5f5ff;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
 }
 
 header {
-  padding: 18px;
+  padding: 18px 12px;
   text-align: center;
-  background: #191b2b;
-  border-bottom: 1px solid #303248;
+  background: #131629;
+  border-bottom: 1px solid #292e49;
+  box-shadow: 0 4px 20px #0005;
 }
 
 header h2 {
   margin: 0;
-  color: #9b8cff;
+  color: #a99aff;
+  font-size: 25px;
+  letter-spacing: 1px;
 }
 
 header p {
-  margin: 6px 0 0;
-  color: #aaa;
+  margin: 6px 0 12px;
+  color: #a5a9c2;
   font-size: 13px;
+}
+
+header button {
+  padding: 10px 15px;
+  margin: 4px;
+  border-radius: 20px;
+  background: #252b48;
+  border: 1px solid #56517f;
+  color: white;
 }
 
 #chat {
   flex: 1;
   overflow-y: auto;
-  padding: 16px;
+  padding: 18px;
+  scroll-behavior: smooth;
 }
 
 .message {
-  padding: 12px 15px;
-  margin: 10px 0;
-  border-radius: 15px;
+  padding: 13px 16px;
+  margin: 12px 0;
+  border-radius: 18px;
   max-width: 85%;
-  line-height: 1.5;
+  line-height: 1.6;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+  box-shadow: 0 4px 12px #0003;
 }
 
 .user {
-  background: #6655d9;
+  background: linear-gradient(135deg, #7161ef, #5140bd);
   margin-left: auto;
+  border-bottom-right-radius: 5px;
 }
 
 .bot {
-  background: #25283b;
+  background: #1c2236;
+  border: 1px solid #303955;
   margin-right: auto;
+  border-bottom-left-radius: 5px;
 }
 
 #status {
-  color: #aaa;
-  padding: 5px 15px;
+  color: #a99aff;
+  padding: 7px 15px;
   font-size: 12px;
 }
 
 footer {
   display: flex;
   gap: 8px;
-  padding: 12px;
-  background: #191b2b;
+  padding: 13px;
+  background: #131629;
+  border-top: 1px solid #292e49;
 }
 
 input {
   flex: 1;
   min-width: 0;
   padding: 14px;
-  border: 1px solid #41445e;
+  border: 1px solid #41496c;
   border-radius: 25px;
-  background: #25283b;
+  background: #20263b;
   color: white;
   outline: none;
+  font-size: 14px;
 }
 
-button {
+input:focus {
+  border-color: #9b8cff;
+}
+
+footer button {
   border: 0;
   border-radius: 25px;
-  padding: 0 18px;
-  background: #7965ef;
+  padding: 0 17px;
+  background: linear-gradient(135deg, #917dff, #6651dc);
   color: white;
   font-weight: bold;
 }
-</style>
-</head>
 
-<body>
+button {
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.96);
+}
+
+button:disabled {
+  opacity: 0.5;
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 15px 8px;
+  }
+
+  #chat {
+    padding: 12px;
+  }
+
+  .message {
+    max-width: 90%;
+  }
+
+  footer {
+    padding: 10px;
+  }
+}
+</style>
 
 <header>
   <h2>✨ YUKI AI</h2>
