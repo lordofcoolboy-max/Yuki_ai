@@ -9,169 +9,285 @@
 <style>
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --purple: #a855f7;
+  --blue: #38bdf8;
+  --cyan: #2dd4bf;
+  --pink: #f472b6;
 }
 
 body {
-  margin: 0;
-  font-family: Arial, sans-serif;
+  min-height: 100dvh;
   background:
-    radial-gradient(circle at top, #292052, #0a0b16 55%);
-  color: #fff;
+    radial-gradient(ellipse at 5% 5%, #55218c 0%, transparent 38%),
+    radial-gradient(ellipse at 95% 10%, #075985 0%, transparent 38%),
+    radial-gradient(ellipse at 10% 95%, #075e58 0%, transparent 35%),
+    radial-gradient(ellipse at 95% 95%, #831843 0%, transparent 35%),
+    #070914;
+  color: #f8fafc;
+  font-family: Arial, sans-serif;
   display: flex;
   flex-direction: column;
-  height: 100dvh;
   overflow: hidden;
 }
 
 header {
-  padding: 20px 12px 15px;
-  text-align: center;
-  background: rgba(22, 19, 43, 0.85);
-  border-bottom: 1px solid #51447d;
-  box-shadow: 0 5px 25px #0006;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+  border-bottom: 1px solid #ffffff20;
+  background: #ffffff08;
+  backdrop-filter: blur(18px);
 }
 
-header h2 {
-  margin: 0;
-  font-size: 28px;
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 43px;
+  height: 43px;
+  border-radius: 15px;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  background: linear-gradient(135deg, var(--purple), var(--blue), var(--cyan), var(--pink));
+  box-shadow: 0 0 22px #a855f788;
+}
+
+.brand h2 {
+  font-size: 20px;
   letter-spacing: 2px;
-  color: #c3a8ff;
-  text-shadow: 0 0 18px #9470ff;
+  background: linear-gradient(90deg, #d8b4fe, #67e8f9, #f9a8d4);
+  color: transparent;
+  background-clip: text;
 }
 
-header p {
-  margin: 7px 0 14px;
-  font-size: 13px;
-  color: #c4bddb;
+.brand small {
+  display: block;
+  font-size: 10px;
+  color: #a5b4fc;
+  margin-top: 3px;
+  letter-spacing: 2px;
 }
 
-header button {
-  margin: 4px;
-  padding: 10px 15px;
-  border-radius: 22px;
-  border: 1px solid #7460a9;
-  background: #292343;
+.header-actions {
+  display: flex;
+  gap: 7px;
+}
+
+.top-btn {
+  border: 1px solid #ffffff25;
+  background: #ffffff10;
   color: white;
-  font-weight: bold;
+  padding: 9px 11px;
+  border-radius: 12px;
+  font-size: 11px;
+  cursor: pointer;
 }
 
-#chat {
+.top-btn:active, .send:active, .mic:active {
+  transform: scale(.94);
+}
+
+#voiceToggle {
+  border-color: #2dd4bf88;
+  color: #5eead4;
+}
+
+main {
   flex: 1;
+  min-height: 0;
   overflow-y: auto;
-  padding: 18px 14px;
+  padding: 22px 14px;
   scroll-behavior: smooth;
 }
 
+.welcome {
+  text-align: center;
+  padding: 35px 10px 22px;
+}
+
+.orb {
+  width: 125px;
+  height: 125px;
+  border-radius: 50%;
+  margin: 0 auto 22px;
+  display: grid;
+  place-items: center;
+  font-size: 53px;
+  background: radial-gradient(circle at 30% 25%, #ffffff, #a855f7 23%, #2563eb 55%, #0f172a 78%);
+  box-shadow: 0 0 25px #a855f7aa, 0 0 65px #38bdf855, inset 0 0 25px #ffffff55;
+  animation: float 3s ease-in-out infinite, glow 4s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 25px #a855f7aa, 0 0 55px #38bdf855; }
+  to { box-shadow: 0 0 35px #f472b6aa, 0 0 75px #2dd4bf88; }
+}
+
+.welcome h1 {
+  font-size: 29px;
+  margin-bottom: 10px;
+  background: linear-gradient(90deg, #c084fc, #67e8f9, #f9a8d4);
+  color: transparent;
+  background-clip: text;
+}
+
+.welcome p {
+  color: #b8c2d9;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.status {
+  margin-top: 14px;
+  color: #5eead4;
+  font-size: 11px;
+  letter-spacing: 2px;
+}
+
+.suggestions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  max-width: 440px;
+  margin: 15px auto;
+}
+
+.suggestion {
+  background: #ffffff0c;
+  border: 1px solid #ffffff20;
+  color: #e0e7ff;
+  border-radius: 15px;
+  padding: 13px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.suggestion:hover {
+  border-color: var(--cyan);
+  background: #2dd4bf18;
+}
+
+#chat {
+  max-width: 700px;
+  margin: auto;
+}
+
 .message {
-  padding: 14px 17px;
+  padding: 13px 15px;
   margin: 13px 0;
-  max-width: 86%;
-  border-radius: 19px;
+  max-width: 85%;
+  border-radius: 18px;
+  font-size: 14px;
   line-height: 1.6;
   white-space: pre-wrap;
   overflow-wrap: anywhere;
-  box-shadow: 0 5px 18px #0004;
 }
 
 .user {
   margin-left: auto;
-  background: linear-gradient(135deg, #a477ff, #6544d6);
-  border: 1px solid #b69aff;
+  background: linear-gradient(135deg, #7c3aed, #2563eb);
   border-bottom-right-radius: 5px;
 }
 
 .bot {
   margin-right: auto;
-  background: rgba(35, 32, 58, 0.95);
-  border: 1px solid #514674;
+  background: #ffffff12;
+  border: 1px solid #ffffff20;
   border-bottom-left-radius: 5px;
+  backdrop-filter: blur(15px);
 }
 
-#status {
-  padding: 8px 16px;
-  color: #c3a8ff;
+.typing {
+  color: #67e8f9;
   font-size: 12px;
-  background: rgba(15, 13, 30, 0.8);
+  margin: 10px;
 }
 
 footer {
+  padding: 12px 12px max(14px, env(safe-area-inset-bottom));
+  border-top: 1px solid #ffffff20;
+  background: #080d1dcc;
+  backdrop-filter: blur(20px);
+}
+
+.input-area {
+  max-width: 700px;
+  margin: auto;
   display: flex;
   align-items: center;
   gap: 8px;
-  padding: 13px;
-  background: rgba(22, 19, 43, 0.96);
-  border-top: 1px solid #51447d;
+  padding: 8px;
+  border-radius: 19px;
+  background: #ffffff10;
+  border: 1px solid #ffffff25;
+  box-shadow: 0 0 25px #38bdf822;
 }
 
-input {
+#userInput {
   flex: 1;
   min-width: 0;
-  padding: 15px;
-  border-radius: 25px;
-  border: 1px solid #66558f;
-  background: #211d38;
-  color: white;
+  background: transparent;
+  border: none;
   outline: none;
-  font-size: 14px;
-}
-
-input::placeholder {
-  color: #aaa0c4;
-}
-
-input:focus {
-  border-color: #bd9aff;
-  box-shadow: 0 0 12px #8960d866;
-}
-
-button {
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-button:active {
-  transform: scale(0.94);
-}
-
-footer button {
-  border: 0;
-  border-radius: 24px;
-  padding: 13px 16px;
   color: white;
-  font-weight: bold;
-  background: linear-gradient(135deg, #a477ff, #6844d6);
-  box-shadow: 0 3px 15px #8056e955;
+  font-size: 14px;
+  padding: 10px 5px;
 }
 
-footer button:disabled {
-  opacity: 0.5;
+#userInput::placeholder {
+  color: #94a3b8;
 }
 
-@media (max-width: 480px) {
-  header {
-    padding: 16px 8px;
-  }
+.mic, .send {
+  width: 43px;
+  height: 43px;
+  flex-shrink: 0;
+  border: none;
+  border-radius: 14px;
+  color: white;
+  font-size: 19px;
+  cursor: pointer;
+  background: linear-gradient(135deg, #a855f7, #2563eb);
+}
 
-  header h2 {
-    font-size: 25px;
-  }
+.send {
+  background: linear-gradient(135deg, #0891b2, #0d9488);
+}
 
-  #chat {
-    padding: 12px;
-  }
+.mic.listening {
+  background: linear-gradient(135deg, #ec4899, #9333ea);
+  animation: pulse 1s infinite;
+}
 
-  .message {
-    max-width: 91%;
-  }
+@keyframes pulse {
+  50% { box-shadow: 0 0 0 9px #ec489944; }
+}
 
-  footer {
-    padding: 10px;
-    gap: 6px;
-  }
+.note {
+  text-align: center;
+  color: #64748b;
+  font-size: 10px;
+  margin-top: 9px;
+}
 
-  footer button {
-    padding: 13px 12px;
-  }
+@media (max-width: 380px) {
+  .top-btn { padding: 8px 7px; font-size: 10px; }
+  .brand h2 { font-size: 17px; }
 }
 </style>
 </head>
@@ -179,93 +295,153 @@ footer button:disabled {
 <body>
 
 <header>
-  <h2>✨ YUKI AI</h2>
-  <p>Your Personal AI Assistant</p>
-  <button id="newChat" onclick="newChat()">＋ New Chat</button>
-  <button id="historyBtn" onclick="showHistory()">📚 History</button>
+  <div class="brand">
+    <div class="logo">✦</div>
+    <div>
+      <h2>YUKI AI</h2>
+      <small>YOUR AI COMPANION</small>
+    </div>
+  </div>
+
+  <div class="header-actions">
+    <button class="top-btn" onclick="newChat()">＋ New</button>
+    <button class="top-btn" onclick="showHistory()">▤ History</button>
+    <button class="top-btn" id="voiceToggle" onclick="toggleSpeech()">🔊 ON</button>
+  </div>
 </header>
 
-<div id="chat">
-  <div class="message bot">
-    Hi! I'm YUKI AI. How can I help you?
-  </div>
-</div>
+<main id="main">
+  <section class="welcome" id="welcome">
+    <div class="orb">✦</div>
+    <h1>Hello, I'm YUKI</h1>
+    <p>Your intelligent AI assistant.<br>Ask anything. Let's explore together.</p>
+    <div class="status" id="statusText">● SYSTEM ONLINE</div>
+  </section>
 
-<div id="status">Ready</div>
+  <div class="suggestions" id="suggestions">
+    <button class="suggestion" onclick="quickAsk('Teach me English')">📚 Learn English</button>
+    <button class="suggestion" onclick="quickAsk('Tell me a fun fact')">💡 Fun facts</button>
+    <button class="suggestion" onclick="quickAsk('Explain artificial intelligence')">🤖 About AI</button>
+    <button class="suggestion" onclick="quickAsk('Tell me a short story')">📖 Story time</button>
+  </div>
+
+  <div id="chat"></div>
+</main>
 
 <footer>
-  <input id="message" placeholder="Ask YUKI anything..." />
-  <button onclick="startVoice()">🎤</button>
-  <button id="send" onclick="sendMessage()">➤</button>
+  <div class="input-area">
+    <button class="mic" id="micBtn" onclick="startVoice()" title="Voice input">🎙️</button>
+    <input id="userInput" placeholder="Message YUKI..." autocomplete="off">
+    <button class="send" onclick="sendMessage()" title="Send">➤</button>
+  </div>
+  <div class="note">YUKI AI • Powered by AI</div>
 </footer>
 
 <script>
+let yukiHistory = JSON.parse(localStorage.getItem("yukiHistory") || "[]");
+let archivedChats = JSON.parse(localStorage.getItem("yukiArchivedChats") || "[]");
+let speechEnabled = true;
+let busy = false;
+let recognition = null;
+
 const chat = document.getElementById("chat");
-const input = document.getElementById("message");
-const statusText = document.getElementById("status");
-const sendButton = document.getElementById("send");
+const main = document.getElementById("main");
+const input = document.getElementById("userInput");
+
+function saveHistory() {
+  localStorage.setItem("yukiHistory", JSON.stringify(yukiHistory));
+}
 
 function addMessage(text, type) {
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("suggestions").style.display = "none";
+
   const div = document.createElement("div");
   div.className = "message " + type;
   div.textContent = text;
   chat.appendChild(div);
-  chat.scrollTop = chat.scrollHeight;
+  main.scrollTop = main.scrollHeight;
+  return div;
+}
+
+function toggleSpeech() {
+  speechEnabled = !speechEnabled;
+
+  const button = document.getElementById("voiceToggle");
+  button.textContent = speechEnabled ? "🔊 ON" : "🔇 OFF";
+  button.style.color = speechEnabled ? "#5eead4" : "#fda4af";
+
+  if (!speechEnabled && "speechSynthesis" in window) {
+    speechSynthesis.cancel();
+  }
+
+  document.getElementById("statusText").textContent =
+    speechEnabled ? "● VOICE ENABLED" : "● VOICE DISABLED";
+}
+
+function speakReply(text) {
+  if (!speechEnabled || !("speechSynthesis" in window)) return;
+
+  speechSynthesis.cancel();
+  const speech = new SpeechSynthesisUtterance(text);
+  speech.lang = "ta-IN";
+  speech.rate = 1;
+  speech.pitch = 1;
+  speechSynthesis.speak(speech);
 }
 
 async function sendMessage() {
   const message = input.value.trim();
-  if (!message) return;
+  if (!message || busy) return;
 
-  addMessage(message, "user");
+  busy = true;
   input.value = "";
-  sendButton.disabled = true;
-  statusText.textContent = "YUKI is thinking...";
+  addMessage(message, "user");
 
-  const history = JSON.parse(
-    localStorage.getItem("yukiHistory") || "[]"
-  );
+  const typing = addMessage("YUKI is thinking...", "bot");
 
   try {
     const response = await fetch("/api/chat", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        message,
-        history: history.slice(-10)
+        message: message,
+        history: yukiHistory.slice(-10)
       })
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error || "AI request failed");
+      throw new Error(data.error || "AI service unavailable");
     }
 
-    const reply = data.reply || "No reply received.";
+    if (!data.reply) {
+      throw new Error("No reply received from AI");
+    }
 
-    history.push(
+    typing.textContent = data.reply;
+
+    yukiHistory.push(
       { role: "user", content: message },
-      { role: "assistant", content: reply }
+      { role: "assistant", content: data.reply }
     );
 
-    localStorage.setItem(
-      "yukiHistory",
-      JSON.stringify(history.slice(-10))
-    );
-
-    addMessage(reply, "bot");
-    speakReply(reply);
-    statusText.textContent = "Ready";
+    yukiHistory = yukiHistory.slice(-20);
+    saveHistory();
+    speakReply(data.reply);
 
   } catch (error) {
-    addMessage("Sorry! " + error.message, "bot");
-    statusText.textContent = "Connection error";
+    typing.textContent = "Sorry! " + error.message;
+  } finally {
+    busy = false;
+    main.scrollTop = main.scrollHeight;
   }
+}
 
-  sendButton.disabled = false;
+function quickAsk(message) {
+  input.value = message;
+  sendMessage();
 }
 
 input.addEventListener("keydown", function(event) {
@@ -277,133 +453,107 @@ function startVoice() {
     window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    alert("Voice recognition is not supported. Try Chrome.");
+    alert("Voice input is not supported in this browser. Try Chrome.");
     return;
   }
 
-  const recognition = new SpeechRecognition();
+  if (recognition) {
+    recognition.stop();
+    recognition = null;
+    document.getElementById("micBtn").classList.remove("listening");
+    return;
+  }
+
+  recognition = new SpeechRecognition();
   recognition.lang = "ta-IN";
   recognition.interimResults = false;
 
-  statusText.textContent = "Listening...";
+  recognition.onstart = () => {
+    document.getElementById("micBtn").classList.add("listening");
+  };
 
-  recognition.onresult = function(event) {
+  recognition.onresult = (event) => {
     input.value = event.results[0][0].transcript;
     sendMessage();
   };
 
-  recognition.onerror = function() {
-    statusText.textContent = "Voice error. Try again.";
+  recognition.onerror = () => {
+    document.getElementById("micBtn").classList.remove("listening");
+    recognition = null;
   };
 
-  recognition.onend = function() {
-    if (statusText.textContent === "Listening...") {
-      statusText.textContent = "Ready";
-    }
+  recognition.onend = () => {
+    document.getElementById("micBtn").classList.remove("listening");
+    recognition = null;
   };
 
   recognition.start();
 }
 
-function speakReply(text) {
-  const speech = new SpeechSynthesisUtterance(text);
-  speech.lang = "ta-IN";
-  window.speechSynthesis.speak(speech);
-}
-
-window.addEventListener("load", function() {
-  const history = JSON.parse(
-    localStorage.getItem("yukiHistory") || "[]"
-  );
-
-  if (history.length > 0) {
-    chat.innerHTML = "";
-
-    history.forEach(function(item) {
-      if (
-        item &&
-        ["user", "assistant"].includes(item.role) &&
-        typeof item.content === "string"
-      ) {
-        addMessage(
-          item.content,
-          item.role === "user" ? "user" : "bot"
-        );
-      }
-    });
-  }
-});
-
 function newChat() {
-  const confirmNew = confirm("Start a new chat?");
-  if (!confirmNew) return;
-
-  const history = JSON.parse(
-    localStorage.getItem("yukiHistory") || "[]"
-  );
-
-  if (history.length > 0) {
-    const chats = JSON.parse(
-      localStorage.getItem("yukiArchivedChats") || "[]"
-    );
-
-    chats.push({
+  if (yukiHistory.length > 0) {
+    archivedChats.push({
       date: new Date().toLocaleString(),
-      messages: history
+      messages: yukiHistory
     });
 
     localStorage.setItem(
       "yukiArchivedChats",
-      JSON.stringify(chats)
+      JSON.stringify(archivedChats)
     );
   }
 
-  localStorage.removeItem("yukiHistory");
+  yukiHistory = [];
+  saveHistory();
   chat.innerHTML = "";
-
-  addMessage("Hello! I'm YUKI AI. How can I help you?", "bot");
-  statusText.textContent = "Ready";
+  document.getElementById("welcome").style.display = "block";
+  document.getElementById("suggestions").style.display = "grid";
 }
 
 function showHistory() {
-  const chats = JSON.parse(
-    localStorage.getItem("yukiArchivedChats") || "[]"
-  );
-
-  if (chats.length === 0) {
-    alert("No old chats found!");
+  if (!archivedChats.length) {
+    alert("No previous chats found.");
     return;
   }
 
-  const options = chats.map((item, index) =>
-    `${index + 1}. ${item.date}`
-  ).join("\n");
-
   const choice = prompt(
-    "Choose a chat number:\n" + options
+    archivedChats.map((item, index) =>
+      (index + 1) + ". " + item.date
+    ).join("\n") + "\n\nEnter chat number:"
   );
 
-  const number = Number(choice);
-
-  if (
-    !Number.isInteger(number) ||
-    number < 1 ||
-    number > chats.length
-  ) {
+  const index = Number(choice) - 1;
+  if (!Number.isInteger(index) || index < 0 || index >= archivedChats.length) {
     return;
   }
 
   chat.innerHTML = "";
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("suggestions").style.display = "none";
 
-  chats[number - 1].messages.forEach(item => {
+  archivedChats[index].messages.forEach(message => {
     addMessage(
-      item.content,
-      item.role === "user" ? "user" : "bot"
+      message.content,
+      message.role === "user" ? "user" : "bot"
     );
   });
-
-  statusText.textContent = "Viewing old chat";
 }
+
+function restoreChat() {
+  if (!yukiHistory.length) return;
+
+  document.getElementById("welcome").style.display = "none";
+  document.getElementById("suggestions").style.display = "none";
+
+  yukiHistory.forEach(message => {
+    addMessage(
+      message.content,
+      message.role === "user" ? "user" : "bot"
+    );
+  });
+}
+
+restoreChat();
 </script>
 
 </body>
