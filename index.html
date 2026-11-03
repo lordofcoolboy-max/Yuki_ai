@@ -102,6 +102,7 @@ button {
 <header>
   <h2>✨ YUKI AI</h2>
   <p>Your Personal AI Assistant</p>
+  <button id="newChat" onclick="newChat()">+ New Chat</button>
 </header>
 
 <div id="chat">
@@ -247,6 +248,29 @@ function speakReply(text) {
     }
   });
 });
+
+  function newChat() {
+  const confirmNew = confirm("Start a new chat?");
+  if (!confirmNew) return;
+
+  const history = JSON.parse(localStorage.getItem("yukiHistory") || "[]");
+
+  if (history.length > 0) {
+    const chats = JSON.parse(localStorage.getItem("yukiArchivedChats") || "[]");
+
+    chats.push({
+      date: new Date().toLocaleString(),
+      messages: history
+    });
+
+    localStorage.setItem("yukiArchivedChats", JSON.stringify(chats));
+  }
+
+  localStorage.removeItem("yukiHistory");
+  chat.innerHTML = "";
+  addMessage("Hello! I'm YUKI AI. How can I help you?", "bot");
+  statusText.textContent = "Ready";
+}
 </script>
 
 </body>
