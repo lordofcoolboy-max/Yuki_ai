@@ -4,248 +4,303 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#080916">
-<title>YUKI AI — Crystal Infinity</title>
+<meta name="theme-color" content="#080b19">
+<title>YUKI AI — Infinity Glass</title>
 
 <style>
 :root {
-  --bg:#080916;
+  --bg:#080b19;
   --glass:rgba(255,255,255,.075);
   --glass2:rgba(255,255,255,.12);
-  --line:rgba(255,255,255,.17);
-  --white:#f8f7ff;
-  --muted:#aaa9c4;
-  --purple:#b68cff;
-  --blue:#7bdcff;
-  --pink:#ffb9e8;
+  --line:rgba(255,255,255,.16);
+  --white:#f8f8ff;
+  --muted:#a9b1c9;
+  --purple:#b58cff;
+  --blue:#79d9ff;
+  --silver:#dce8ff;
 }
-* { box-sizing:border-box; margin:0; padding:0; }
+* {box-sizing:border-box;margin:0;padding:0}
 body {
   min-height:100vh;
   color:var(--white);
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   background:
-    radial-gradient(ellipse at 15% 5%,#53317b88,transparent 38%),
-    radial-gradient(ellipse at 90% 70%,#145b9180,transparent 40%),
-    linear-gradient(145deg,#080916,#11132b 55%,#080916);
+    radial-gradient(ellipse at 15% 10%,#39276b 0,transparent 40%),
+    radial-gradient(ellipse at 90% 70%,#123c62 0,transparent 40%),
+    linear-gradient(145deg,#080b19,#11152c 55%,#080b19);
   background-attachment:fixed;
 }
-button,input,textarea,select { font:inherit; }
-button { cursor:pointer; color:inherit; }
+button,input,textarea,select {font:inherit}
+button {cursor:pointer;color:inherit}
 .glass {
-  background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,.035));
+  background:var(--glass);
   border:1px solid var(--line);
-  box-shadow:inset 0 1px 1px #ffffff22,0 12px 35px #0003;
-  backdrop-filter:blur(25px) saturate(160%);
-  -webkit-backdrop-filter:blur(25px) saturate(160%);
+  backdrop-filter:blur(24px) saturate(160%);
+  -webkit-backdrop-filter:blur(24px) saturate(160%);
+  box-shadow:inset 0 1px 1px #ffffff18,0 12px 35px #0003;
 }
-.app { max-width:1050px; margin:auto; min-height:100vh; padding:15px; display:flex; flex-direction:column; }
+.app {
+  width:min(100%,1000px);
+  min-height:100vh;
+  margin:auto;
+  padding:16px;
+  display:flex;
+  flex-direction:column;
+}
 header {
-  display:flex; align-items:center; justify-content:space-between;
-  padding:10px 5px 18px; border-bottom:1px solid #ffffff18;
+  height:70px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-radius:22px;
+  padding:9px 13px;
+  position:sticky;
+  top:10px;
+  z-index:5;
 }
-.brand { display:flex; align-items:center; gap:11px; }
-.logo {
-  width:49px;height:49px;border-radius:17px;
+.brand {display:flex;align-items:center;gap:11px}
+.brand-logo {
+  width:48px;height:48px;border-radius:17px;
   display:grid;place-items:center;
-  background:linear-gradient(140deg,#d6b7ff,#678fff 60%,#b5f1ff);
-  box-shadow:0 0 28px #a879ff88;
-  overflow:hidden;
+  background:linear-gradient(145deg,#d7c4ff55,#8bdfff33);
+  border:1px solid #ffffff45;
+  box-shadow:0 0 24px #a78bfa55,inset 0 1px #ffffff66;
 }
-.logo svg { width:46px;height:46px; }
+.brand-logo svg {width:39px;height:39px}
 .brand h1 {
-  font-size:21px;letter-spacing:3px;
-  background:linear-gradient(90deg,#fff,#c7a4ff,#8be6ff);
+  font-size:20px;letter-spacing:3px;
+  background:linear-gradient(100deg,#fff,#b8dfff,#d6b5ff);
   -webkit-background-clip:text;color:transparent;
 }
-.brand small { font-size:9px;letter-spacing:2px;color:var(--muted); }
-.actions { display:flex;gap:8px; }
+.brand small {display:block;color:var(--muted);font-size:9px;letter-spacing:2px;margin-top:3px}
+.actions {display:flex;gap:7px}
 .glass-btn {
-  border:1px solid var(--line);
-  background:linear-gradient(145deg,#ffffff20,#ffffff06);
-  backdrop-filter:blur(20px);
+  min-width:42px;height:42px;padding:0 12px;
   border-radius:15px;
-  padding:11px 13px;
-  box-shadow:inset 0 1px #ffffff25,0 6px 15px #0003;
+  background:linear-gradient(145deg,#ffffff20,#ffffff05);
+  border:1px solid #ffffff25;
+  box-shadow:inset 0 1px #ffffff30,0 5px 15px #0002;
   transition:.2s;
 }
-.glass-btn:active { transform:scale(.94); }
-.glass-btn:hover { border-color:#c4a3ff99; }
-
-main { flex:1;display:flex;flex-direction:column; }
-.home {
+.glass-btn:active,.send:active {transform:scale(.94)}
+.glass-btn:hover {border-color:#b9a1ff}
+main {flex:1;display:flex;flex-direction:column}
+.welcome {
   text-align:center;
-  padding:42px 10px 25px;
-  transition:.3s;
+  padding:48px 12px 30px;
 }
-.home-logo {
-  width:155px;height:155px;
-  border-radius:46px;
-  margin:0 auto 24px;
-  display:grid;place-items:center;
-  background:linear-gradient(145deg,#ffffff23,#ffffff04);
-  border:1px solid #ffffff35;
-  box-shadow:0 0 70px #9b70ff40,inset 0 2px #ffffff35;
-  backdrop-filter:blur(25px);
-  animation:float 5s ease-in-out infinite;
+.orb-wrap {
+  width:190px;height:190px;margin:0 auto 25px;
+  position:relative;display:grid;place-items:center;
 }
-.home-logo svg { width:135px;height:135px; }
-@keyframes float {
-  0%,100% { transform:translateY(0) rotate(-2deg); }
-  50% { transform:translateY(-10px) rotate(2deg); }
+.orb {
+  width:155px;height:155px;border-radius:50%;
+  background:
+    radial-gradient(circle at 30% 25%,#ffffffb0,transparent 20%),
+    radial-gradient(circle at 60% 70%,#55cfff99,transparent 45%),
+    linear-gradient(145deg,#c9a8ff,#536ac9 55%,#1a315e);
+  box-shadow:0 0 35px #9c8aff77,0 0 90px #50c9ff33,inset -15px -15px 35px #111b55aa,inset 8px 8px 25px #ffffff88;
+  animation:orbFloat 5s ease-in-out infinite;
+  position:relative;
 }
-.home h2 { font-size:clamp(30px,7vw,48px);letter-spacing:-1px; }
-.gradient {
-  background:linear-gradient(90deg,#e1c5ff,#8adfff,#ffc8ed);
+.orb:before {
+  content:"";position:absolute;inset:12px;
+  border:1px solid #ffffff65;border-radius:50%;
+}
+.orb:after {
+  content:"";position:absolute;width:70px;height:25px;
+  top:28px;left:27px;border-radius:50%;
+  background:#ffffff55;filter:blur(13px);transform:rotate(-30deg);
+}
+.orbit {
+  position:absolute;inset:4px;border-radius:50%;
+  border:1px solid #ffffff25;transform:rotate(-25deg) scaleY(.45);
+}
+.orbit.two {transform:rotate(55deg) scaleY(.45);border-color:#91dfff55}
+@keyframes orbFloat {
+  0%,100% {transform:translateY(0) scale(1)}
+  50% {transform:translateY(-9px) scale(1.025)}
+}
+.welcome h2 {font-size:clamp(30px,7vw,48px);letter-spacing:-1px}
+.shine {
+  background:linear-gradient(100deg,#fff,#a9dfff,#d5b8ff,#fff);
+  background-size:250%;
   -webkit-background-clip:text;color:transparent;
+  animation:shine 6s linear infinite;
 }
-.home p { color:var(--muted);line-height:1.7;margin-top:12px; }
+@keyframes shine {to{background-position:250% center}}
+.welcome p {
+  color:var(--muted);line-height:1.7;
+  margin:12px auto 0;max-width:440px;
+}
 .online {
   display:inline-flex;align-items:center;gap:7px;
-  padding:8px 14px;border-radius:30px;
-  margin-bottom:20px;font-size:11px;color:#baf5df;
+  border:1px solid #8dffc344;background:#8dffc311;
+  padding:7px 13px;border-radius:30px;
+  font-size:11px;color:#baffd5;margin-bottom:20px;
 }
-.dot { width:7px;height:7px;background:#64e8b2;border-radius:50%;box-shadow:0 0 10px #64e8b2; }
-.cards {
-  max-width:660px;margin:27px auto 0;
-  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;
+.dot {width:7px;height:7px;border-radius:50%;background:#78ffad;box-shadow:0 0 12px #78ffad}
+.suggestions {
+  display:flex;justify-content:center;flex-wrap:wrap;
+  gap:9px;margin-top:25px;
 }
-.card {
-  text-align:left;padding:17px;border-radius:20px;
-  cursor:pointer;transition:.2s;
+.suggestion {
+  border:1px solid #ffffff20;
+  background:linear-gradient(145deg,#ffffff16,#ffffff05);
+  backdrop-filter:blur(18px);
+  padding:11px 15px;border-radius:18px;
+  color:#e9e8ff;font-size:13px;
+  box-shadow:inset 0 1px #ffffff20;
 }
-.card:active { transform:scale(.97); }
-.card b { display:block;margin-bottom:7px; }
-.card span { color:var(--muted);font-size:12px;line-height:1.5; }
+.suggestion:hover {border-color:#bba5ff}
 .chat {
-  max-width:850px;width:100%;margin:0 auto;
-  flex:1;display:flex;flex-direction:column;gap:14px;
-  padding:18px 0 25px;
+  width:100%;max-width:820px;margin:auto;
+  display:flex;flex-direction:column;gap:14px;
+  padding:12px 0 22px;flex:1;
 }
 .message {
   max-width:88%;padding:15px 17px;
-  border-radius:22px;line-height:1.65;
+  border:1px solid #ffffff1c;
+  border-radius:20px;line-height:1.65;
   white-space:pre-wrap;overflow-wrap:anywhere;
-  border:1px solid #ffffff19;
-  backdrop-filter:blur(22px);
-  box-shadow:inset 0 1px #ffffff18,0 8px 20px #0002;
+  box-shadow:inset 0 1px #ffffff18,0 8px 22px #0002;
 }
 .message.user {
   align-self:flex-end;
-  background:linear-gradient(140deg,#9670d966,#557cce55);
+  background:linear-gradient(135deg,#9b78e555,#4d8bdc44);
   border-bottom-right-radius:6px;
 }
 .message.bot {
   align-self:flex-start;
-  background:linear-gradient(140deg,#ffffff16,#ffffff06);
+  background:linear-gradient(145deg,#ffffff12,#ffffff05);
+  backdrop-filter:blur(18px);
   border-bottom-left-radius:6px;
 }
-.who { display:block;font-size:10px;letter-spacing:2px;color:#cbb3ff;margin-bottom:6px; }
+.who {
+  display:block;color:#cbb5ff;
+  font-size:10px;letter-spacing:2px;
+  margin-bottom:6px;font-weight:700;
+}
 .composer-area {
   position:sticky;bottom:0;
-  padding:12px 0 7px;
-  background:linear-gradient(transparent,#080916 35%);
+  padding:15px 0 8px;
+  background:linear-gradient(transparent,#080b19 35%);
+  z-index:3;
 }
 .composer {
-  max-width:850px;margin:auto;
-  display:flex;align-items:flex-end;gap:9px;
-  padding:10px;border-radius:25px;
-  background:linear-gradient(140deg,#ffffff19,#ffffff07);
-  border:1px solid #ffffff35;
-  box-shadow:inset 0 1px #ffffff28,0 10px 35px #0005;
-  backdrop-filter:blur(30px);
+  max-width:820px;margin:auto;
+  min-height:65px;display:flex;align-items:flex-end;
+  gap:8px;padding:9px;border-radius:23px;
+  background:linear-gradient(145deg,#ffffff18,#ffffff08);
+  border:1px solid #ffffff30;
+  backdrop-filter:blur(28px);
+  -webkit-backdrop-filter:blur(28px);
+  box-shadow:inset 0 1px #ffffff35,0 10px 35px #0005,0 0 30px #8d7aff17;
 }
 .composer textarea {
   flex:1;min-width:0;max-height:130px;resize:none;
   background:transparent;border:0;outline:0;
-  color:white;padding:11px;
+  color:white;padding:12px 8px;
 }
-.composer textarea::placeholder { color:#aaa8c5; }
+.composer textarea::placeholder {color:#a9b1c9}
+.send,.mic {
+  height:44px;min-width:44px;border-radius:16px;
+  border:1px solid #ffffff30;
+  background:linear-gradient(145deg,#ffffff25,#ffffff08);
+  box-shadow:inset 0 1px #ffffff45,0 5px 15px #0003;
+}
 .send {
-  width:45px;height:45px;border-radius:16px;
-  border:1px solid #ffffff45;
-  background:linear-gradient(145deg,#c3a1ff,#5a8fff);
-  color:#17132c;font-size:20px;font-weight:bold;
-  box-shadow:0 0 20px #a77cff55;
+  min-width:55px;
+  background:linear-gradient(135deg,#b49aff,#65cfff);
+  color:#10152d;font-size:19px;font-weight:bold;
 }
-.mic { width:45px;height:45px;border-radius:16px; }
-.status { text-align:center;color:var(--muted);font-size:11px;padding:9px; }
+.mic {font-size:18px}
+.send:disabled {opacity:.5}
+.status {text-align:center;color:#929bb8;font-size:11px;padding:9px}
+footer {text-align:center;color:#68718f;font-size:10px;padding:12px}
 .overlay {
-  display:none;position:fixed;inset:0;z-index:20;
-  background:#0009;justify-content:flex-end;
+  position:fixed;inset:0;z-index:20;
+  display:none;justify-content:flex-end;
+  background:#02040bbd;backdrop-filter:blur(8px);
 }
-.overlay.open { display:flex; }
+.overlay.open {display:flex}
 .panel {
-  width:min(390px,93vw);height:100%;
-  overflow-y:auto;padding:23px;
-  background:linear-gradient(145deg,#24203c,#101326);
-  border-left:1px solid #ffffff28;
-  box-shadow:-15px 0 50px #0006;
+  width:min(410px,94vw);height:100%;
+  padding:23px;overflow:auto;
+  background:linear-gradient(145deg,#202440f5,#0c1126f8);
+  border-left:1px solid #ffffff30;
+  box-shadow:-15px 0 50px #0007;
 }
-.panel-head { display:flex;justify-content:space-between;align-items:center;margin-bottom:26px; }
-.panel h2 { font-size:21px; }
-.setting { margin:18px 0; }
-.setting label { display:block;color:var(--muted);font-size:12px;margin-bottom:9px; }
+.panel-head {display:flex;justify-content:space-between;align-items:center;margin-bottom:25px}
+.panel h2 {font-size:21px}
+.setting {margin:19px 0}
+.setting label {display:block;color:var(--muted);font-size:12px;margin-bottom:9px}
 .setting input,.setting select {
   width:100%;padding:13px;border-radius:14px;
-  background:#ffffff0d;border:1px solid #ffffff25;
-  color:white;outline:0;
+  color:white;background:#ffffff10;
+  border:1px solid #ffffff25;outline:none;
 }
-.setting select option { background:#19152b; }
+.setting select option {background:#171b30}
 .toggle {
-  display:flex;justify-content:space-between;align-items:center;
-  margin:19px 0;font-size:14px;
+  display:flex;justify-content:space-between;
+  align-items:center;margin:18px 0;
 }
-.toggle input { width:20px;height:20px;accent-color:#a78bfa; }
+.toggle input {width:20px;height:20px;accent-color:#a88cff}
 .save {
-  width:100%;padding:14px;border:1px solid #ffffff45;
-  border-radius:16px;color:#17132c;font-weight:bold;
-  background:linear-gradient(120deg,#d5baff,#7bdcff);
-  margin:15px 0;
+  width:100%;padding:14px;border-radius:16px;
+  border:1px solid #ffffff40;
+  background:linear-gradient(120deg,#a58aff,#65cfff);
+  color:#10152d;font-weight:800;
+  box-shadow:inset 0 1px #ffffff99,0 8px 20px #0004;
 }
 .history-item {
   padding:14px;margin:10px 0;border-radius:15px;
+  background:#ffffff0c;border:1px solid #ffffff20;
   cursor:pointer;overflow-wrap:anywhere;
 }
-.history-item:hover { border-color:#c5a5ff; }
-footer { text-align:center;color:#77758f;font-size:10px;padding:14px; }
-.hidden { display:none !important; }
-@media(max-width:500px) {
-  .app { padding:12px; }
-  .home { padding-top:35px; }
-  .home-logo { width:135px;height:135px;border-radius:40px; }
-  .home-logo svg { width:120px;height:120px; }
-  .message { max-width:94%; }
-  .brand h1 { font-size:18px; }
-  .cards { gap:9px; }
-  .card { padding:14px; }
+.history-item:hover {border-color:#b49aff}
+.small-note {font-size:12px;color:var(--muted);line-height:1.6}
+.hidden {display:none!important}
+@media(max-width:520px) {
+  .app {padding:10px}
+  header {height:64px;padding:8px;border-radius:19px}
+  .brand h1 {font-size:17px}
+  .brand small {font-size:8px}
+  .brand-logo {width:43px;height:43px}
+  .actions {gap:5px}
+  .glass-btn {min-width:37px;height:39px;padding:0 9px}
+  .welcome {padding-top:42px}
+  .orb-wrap {width:165px;height:165px}
+  .orb {width:135px;height:135px}
+  .message {max-width:94%}
 }
 </style>
 </head>
 
 <body>
 <div class="app">
-<header>
+
+<header class="glass">
   <div class="brand">
-    <div class="logo">
+    <div class="brand-logo">
       <svg viewBox="0 0 100 100" aria-label="YUKI anime logo">
-        <path d="M12 51 Q2 10 37 20 Q55 -2 69 20 Q103 8 88 60 L78 85 20 85Z" fill="#31204d"/>
-        <path d="M20 48 Q12 16 40 24 L50 10 63 27 Q87 13 83 51 L75 73 25 73Z" fill="#f3d4ff"/>
-        <path d="M19 47 Q9 20 34 20 L48 36 55 15 68 35 Q84 22 84 43 L74 53 27 53Z" fill="#8758d7"/>
-        <ellipse cx="50" cy="57" rx="25" ry="28" fill="#ffe1d8"/>
-        <path d="M25 52 Q22 30 42 31 Q55 39 62 29 Q79 31 76 53 Q66 39 55 45 Q40 34 25 52Z" fill="#292044"/>
-        <ellipse cx="40" cy="58" rx="5" ry="7" fill="#41306d"/>
-        <ellipse cx="61" cy="58" rx="5" ry="7" fill="#41306d"/>
-        <circle cx="42" cy="56" r="2" fill="white"/>
-        <circle cx="63" cy="56" r="2" fill="white"/>
-        <path d="M45 70 Q50 74 56 70" fill="none" stroke="#d07891" stroke-width="2" stroke-linecap="round"/>
-        <path d="M34 85 Q50 74 67 85 L79 100 20 100Z" fill="#79c9f5"/>
-        <path d="M39 83 L50 94 62 83" fill="none" stroke="#fff0c0" stroke-width="3"/>
+        <path d="M15 48 Q0 12 35 20 L49 8 64 22 Q98 9 84 57 L75 87 23 87Z" fill="#241b4c"/>
+        <path d="M22 43 Q13 18 39 26 L50 13 62 28 Q83 15 80 47 L72 70 28 70Z" fill="#c7a8ff"/>
+        <path d="M22 47 Q15 25 37 29 L48 38 58 25 Q77 23 81 45 Q64 37 53 45 Q37 34 22 47" fill="#5d4caa"/>
+        <ellipse cx="50" cy="56" rx="24" ry="27" fill="#ffe4dd"/>
+        <path d="M26 51 Q26 29 43 33 L55 40 65 30 Q80 35 75 54 Q65 42 54 47 Q39 38 26 51" fill="#211b40"/>
+        <ellipse cx="40" cy="57" rx="5" ry="7" fill="#344d85"/>
+        <ellipse cx="61" cy="57" rx="5" ry="7" fill="#344d85"/>
+        <circle cx="42" cy="55" r="2" fill="white"/>
+        <circle cx="63" cy="55" r="2" fill="white"/>
+        <path d="M45 70 Q50 74 56 70" fill="none" stroke="#c36b89" stroke-width="2" stroke-linecap="round"/>
+        <path d="M36 82 Q50 74 65 82 L79 100 20 100Z" fill="#8cbbef"/>
+        <path d="M40 81 L50 92 60 81" fill="none" stroke="#fff" stroke-width="3"/>
       </svg>
     </div>
     <div>
       <h1>YUKI AI</h1>
-      <small>CRYSTAL INFINITY</small>
+      <small>INFINITY GLASS · AI ASSISTANT</small>
     </div>
   </div>
   <div class="actions">
@@ -256,91 +311,67 @@ footer { text-align:center;color:#77758f;font-size:10px;padding:14px; }
 </header>
 
 <main>
-<section class="home" id="home">
-  <div class="home-logo">
-    <svg viewBox="0 0 100 100" aria-label="YUKI anime girl">
-      <path d="M12 51 Q2 10 37 20 Q55 -2 69 20 Q103 8 88 60 L78 85 20 85Z" fill="#31204d"/>
-      <path d="M20 48 Q12 16 40 24 L50 10 63 27 Q87 13 83 51 L75 73 25 73Z" fill="#f3d4ff"/>
-      <path d="M19 47 Q9 20 34 20 L48 36 55 15 68 35 Q84 22 84 43 L74 53 27 53Z" fill="#8758d7"/>
-      <ellipse cx="50" cy="57" rx="25" ry="28" fill="#ffe1d8"/>
-      <path d="M25 52 Q22 30 42 31 Q55 39 62 29 Q79 31 76 53 Q66 39 55 45 Q40 34 25 52Z" fill="#292044"/>
-      <ellipse cx="40" cy="58" rx="5" ry="7" fill="#41306d"/>
-      <ellipse cx="61" cy="58" rx="5" ry="7" fill="#41306d"/>
-      <circle cx="42" cy="56" r="2" fill="white"/>
-      <circle cx="63" cy="56" r="2" fill="white"/>
-      <path d="M45 70 Q50 74 56 70" fill="none" stroke="#d07891" stroke-width="2" stroke-linecap="round"/>
-      <path d="M34 85 Q50 74 67 85 L79 100 20 100Z" fill="#79c9f5"/>
-      <path d="M39 83 L50 94 62 83" fill="none" stroke="#fff0c0" stroke-width="3"/>
-    </svg>
-  </div>
-  <div class="online glass"><span class="dot"></span> YUKI SYSTEM ONLINE</div>
-  <h2>Meet your <span class="gradient">YUKI</span></h2>
-  <p>A little magic. A lot of intelligence.<br>Your personal AI space starts here.</p>
+  <section class="welcome" id="welcome">
+    <div class="orb-wrap">
+      <div class="orbit"></div>
+      <div class="orbit two"></div>
+      <div class="orb"></div>
+    </div>
+    <div class="online"><span class="dot"></span> YUKI IS ONLINE</div>
+    <h2>Welcome to <span class="shine">YUKI</span></h2>
+    <p>Your intelligent AI companion.<br>
+    A little imagination. A lot of intelligence.</p>
+    <div class="suggestions">
+      <button class="suggestion" onclick="suggest('Hello YUKI!')">✦ Say Hello</button>
+      <button class="suggestion" onclick="suggest('Teach me English in Tamil')">◈ Learn English</button>
+      <button class="suggestion" onclick="suggest('Explain artificial intelligence simply')">✧ Explore AI</button>
+    </div>
+  </section>
 
-  <div class="cards">
-    <div class="card glass" onclick="suggest('Teach me English in Tamil')">
-      <b>✦ Learn English</b>
-      <span>Learn step by step with Tamil support.</span>
-    </div>
-    <div class="card glass" onclick="suggest('Explain artificial intelligence simply')">
-      <b>◈ AI Knowledge</b>
-      <span>Explore technology and new ideas.</span>
-    </div>
-    <div class="card glass" onclick="suggest('Help me write a creative story')">
-      <b>✧ Creativity</b>
-      <span>Stories, ideas and creative writing.</span>
-    </div>
-    <div class="card glass" onclick="suggest('Tell me an interesting science fact')">
-      <b>⌘ Discover</b>
-      <span>Find something interesting to learn.</span>
-    </div>
-  </div>
-</section>
-
-<section class="chat" id="chat"></section>
+  <section class="chat" id="chat"></section>
 </main>
 
 <div class="composer-area">
   <div class="composer">
-    <button class="glass-btn mic" id="micBtn" onclick="toggleMic()">🎙</button>
+    <button class="mic" id="micButton" onclick="toggleMic()" title="Voice input">🎙</button>
     <textarea id="message" rows="1" placeholder="Message YUKI..."></textarea>
-    <button class="send" id="sendBtn" onclick="sendMessage()">↑</button>
+    <button class="send" id="sendButton" onclick="sendMessage()">➤</button>
   </div>
-  <div class="status" id="status">✦ YUKI is ready</div>
+  <div class="status" id="status">YUKI is ready ✨</div>
 </div>
 
-<footer>YUKI AI · CRYSTAL INFINITY · YOUR AI SPACE</footer>
+<footer>YUKI AI · INFINITY GLASS EXPERIENCE</footer>
 </div>
 
 <div class="overlay" id="settingsOverlay" onclick="outsideClose(event,'settingsOverlay')">
   <div class="panel">
     <div class="panel-head">
-      <h2>⚙ Settings</h2>
-      <button class="glass-btn" onclick="closePanel('settingsOverlay')">✕</button>
+      <h2>✧ YUKI Settings</h2>
+      <button class="glass-btn" onclick="closeSettings()">✕</button>
     </div>
     <div class="setting">
-      <label>Your name · Memory</label>
-      <input id="nameInput" placeholder="Enter your name">
+      <label for="userName">Your name · Memory</label>
+      <input id="userName" placeholder="Enter your name">
     </div>
     <div class="setting">
-      <label>Voice language</label>
-      <select id="languageInput">
+      <label for="languageMode">Voice language</label>
+      <select id="languageMode">
         <option value="auto">Auto</option>
         <option value="ta-IN">Tamil</option>
         <option value="en-IN">English</option>
       </select>
     </div>
     <div class="toggle">
-      <span>Microphone input</span>
-      <input type="checkbox" id="micInput">
+      <label for="micEnabled">Microphone input</label>
+      <input type="checkbox" id="micEnabled">
     </div>
     <div class="toggle">
-      <span>YUKI voice replies</span>
-      <input type="checkbox" id="voiceInput">
+      <label for="voiceEnabled">YUKI voice replies</label>
+      <input type="checkbox" id="voiceEnabled">
     </div>
     <button class="save" onclick="saveSettings()">SAVE SETTINGS</button>
-    <p style="font-size:12px;color:var(--muted);line-height:1.7">
-      Your name and preferences are saved locally in this browser. They are included in chat context when you message YUKI.
+    <p class="small-note" style="margin-top:20px">
+      Your name and preferences are saved in this browser. They are sent to the AI as context during chats.
     </p>
   </div>
 </div>
@@ -349,23 +380,17 @@ footer { text-align:center;color:#77758f;font-size:10px;padding:14px; }
   <div class="panel">
     <div class="panel-head">
       <h2>◷ Chat History</h2>
-      <button class="glass-btn" onclick="closePanel('historyOverlay')">✕</button>
+      <button class="glass-btn" onclick="closeHistory()">✕</button>
     </div>
-    <button class="save" onclick="newChat();closePanel('historyOverlay')">＋ NEW CHAT</button>
-    <div id="historyList"></div>
+    <button class="save" onclick="newChat();closeHistory()">＋ NEW CHAT</button>
+    <div id="historyList" style="margin-top:18px"></div>
   </div>
 </div>
 
 <script>
-const chatEl = document.getElementById("chat");
-const input = document.getElementById("message");
-const statusEl = document.getElementById("status");
-
-let history = [];
-let archives = [];
-let busy = false;
-let recognition = null;
-let listening = false;
+const chat = document.getElementById("chat");
+const messageInput = document.getElementById("message");
+const statusText = document.getElementById("status");
 
 const defaults = {
   name:"",
@@ -375,199 +400,217 @@ const defaults = {
 };
 
 let settings = {...defaults};
+let history = [];
+let archivedChats = [];
+let busy = false;
+let recognition = null;
+let listening = false;
 
-try {
-  settings = {
-    ...defaults,
-    ...JSON.parse(localStorage.getItem("yukiSettings") || "{}")
-  };
-  history = JSON.parse(localStorage.getItem("yukiHistory") || "[]");
-  archives = JSON.parse(localStorage.getItem("yukiArchivedChats") || "[]");
-} catch(e) {
-  console.warn("Saved settings could not be loaded.");
+function loadJSON(key,fallback) {
+  try {
+    const value = JSON.parse(localStorage.getItem(key));
+    return value ?? fallback;
+  } catch {
+    return fallback;
+  }
 }
 
-function persist() {
+settings = {...defaults,...loadJSON("yukiSettings",{})};
+history = loadJSON("yukiHistory",[]);
+archivedChats = loadJSON("yukiArchivedChats",[]);
+
+function saveAll() {
   localStorage.setItem("yukiSettings",JSON.stringify(settings));
   localStorage.setItem("yukiHistory",JSON.stringify(history));
-  localStorage.setItem("yukiArchivedChats",JSON.stringify(archives));
+  localStorage.setItem("yukiArchivedChats",JSON.stringify(archivedChats));
 }
 
-function renderMessage(role,content) {
-  const div = document.createElement("div");
-  div.className = "message " + (role === "user" ? "user" : "bot");
+function renderMessage(role,text) {
+  const box = document.createElement("div");
+  box.className = "message " + (role === "user" ? "user" : "bot");
 
-  const who = document.createElement("span");
-  who.className = "who";
-  who.textContent = role === "user" ? "YOU" : "YUKI";
+  const label = document.createElement("span");
+  label.className = "who";
+  label.textContent = role === "user" ? "YOU" : "YUKI";
 
-  const body = document.createElement("div");
-  body.textContent = content;
+  const content = document.createElement("div");
+  content.textContent = text;
 
-  div.append(who,body);
-  chatEl.appendChild(div);
-  div.scrollIntoView({behavior:"smooth",block:"end"});
+  box.append(label,content);
+  chat.appendChild(box);
+  chat.scrollTop = chat.scrollHeight;
 }
 
 function renderChat() {
-  chatEl.innerHTML = "";
-  history.forEach(m => renderMessage(m.role,m.content));
-  document.getElementById("home").classList.toggle("hidden",history.length > 0);
+  chat.innerHTML = "";
+  history.forEach(item => renderMessage(item.role,item.content));
+  document.getElementById("welcome").classList.toggle("hidden",history.length > 0);
 }
 
 function detectName(text) {
-  const match = text.match(/(?:my name is|i am|i'm)\s+([a-zA-Z][a-zA-Z ]{0,25})/i);
-  if (match) {
-    settings.name = match[1].trim().replace(/[.!?,]+$/,"");
-    persist();
-  }
+  const english = text.match(/(?:my name is|call me|i am|i'm)\s+([a-zA-Z][a-zA-Z ]{0,25})/i);
+  const tamil = text.match(/(?:என் பெயர்|என்னோட பெயர்|என் பேரு)\s*([^\s,.!?]+)/);
 
-  const tamilMatch = text.match(/(?:என் பெயர்|என்னோட பெயர்|என் பேரு)\s*([\u0B80-\u0BFF]+)/);
-  if (tamilMatch) {
-    settings.name = tamilMatch[1].trim();
-    persist();
+  const found = english?.[1]?.trim() || tamil?.[1]?.trim();
+  if (found) {
+    settings.name = found.replace(/[.!?,]+$/,"").slice(0,30);
+    saveAll();
   }
 }
 
-function memoryPrompt() {
-  return settings.name
-    ? "The user's saved name is " + settings.name +
-      ". Address the user by this name naturally when appropriate. "
-    : "";
+function makeMemory() {
+  if (!settings.name) return "";
+  return "User profile: The user's name is " + settings.name +
+    ". Address the user by this name naturally when appropriate. " +
+    "Remember this profile information throughout the conversation.";
 }
 
 async function sendMessage() {
-  const text = input.value.trim();
+  const text = messageInput.value.trim();
   if (!text || busy) return;
 
   detectName(text);
 
   history.push({role:"user",content:text});
   renderMessage("user",text);
-  persist();
-  input.value = "";
+  saveAll();
+  messageInput.value = "";
+  document.getElementById("welcome").classList.add("hidden");
 
-  document.getElementById("home").classList.add("hidden");
   busy = true;
-  document.getElementById("sendBtn").disabled = true;
-  statusEl.textContent = "YUKI is thinking... ✦";
+  document.getElementById("sendButton").disabled = true;
+  statusText.textContent = "YUKI is thinking...";
+
+  const memory = makeMemory();
+  const fullMessage = memory
+    ? memory + "\n\nUser message: " + text
+    : text;
 
   try {
     const response = await fetch("/api/chat",{
       method:"POST",
       headers:{"Content-Type":"application/json"},
       body:JSON.stringify({
-        message:memoryPrompt() + text,
-        history:history.slice(-11,-1)
+        message:fullMessage,
+        history:history.slice(0,-1).slice(-10)
       })
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      throw new Error(data.error || "AI request failed");
+      throw new Error(data.error || "AI service error");
     }
 
-    const reply = data.reply;
-    if (!reply) throw new Error("Empty AI response");
+    if (!data.reply) throw new Error("Empty AI response");
 
-    history.push({role:"assistant",content:reply});
-    renderMessage("assistant",reply);
-    persist();
+    history.push({role:"assistant",content:data.reply});
+    renderMessage("assistant",data.reply);
+    saveAll();
 
-    if (settings.voice) speak(reply);
+    if (settings.voice) speak(data.reply);
+    statusText.textContent = "YUKI is ready ✨";
 
-    statusEl.textContent = "YUKI is ready ✦";
   } catch(error) {
     console.error(error);
-    renderMessage("assistant","Sorry! I couldn't connect right now. Please try again.");
-    statusEl.textContent = "Connection error";
+    renderMessage("assistant","Sorry! YUKI could not connect right now. Please try again.");
+    statusText.textContent = "Connection problem";
   } finally {
     busy = false;
-    document.getElementById("sendBtn").disabled = false;
-    input.focus();
+    document.getElementById("sendButton").disabled = false;
+    messageInput.focus();
   }
 }
 
 function suggest(text) {
-  input.value = text;
+  messageInput.value = text;
   sendMessage();
 }
 
 function newChat() {
   if (history.length) {
-    archives.unshift({
+    archivedChats.unshift({
+      id:Date.now(),
       date:new Date().toLocaleString(),
       messages:[...history]
     });
-    archives = archives.slice(0,30);
+    archivedChats = archivedChats.slice(0,30);
   }
+
   history = [];
-  persist();
+  saveAll();
   renderChat();
-  statusEl.textContent = settings.name
-    ? "Welcome back, " + settings.name + " ✦"
-    : "New chat started ✦";
+  statusText.textContent = settings.name
+    ? "Welcome back, " + settings.name + " ✨"
+    : "New chat started ✨";
 }
 
 function showHistory() {
   const list = document.getElementById("historyList");
   list.innerHTML = "";
 
-  if (!archives.length) {
+  if (!archivedChats.length) {
     list.textContent = "No previous chats yet.";
   }
 
-  archives.forEach((item,index) => {
-    const el = document.createElement("div");
-    el.className = "history-item glass";
-    const first = item.messages.find(m => m.role === "user");
-    el.textContent = (first?.content || "Chat") + " · " + item.date;
+  archivedChats.forEach(item => {
+    const entry = document.createElement("div");
+    entry.className = "history-item";
 
-    el.onclick = () => {
+    const first = item.messages.find(m => m.role === "user");
+    entry.textContent = (first?.content || "Chat") + " · " + item.date;
+
+    entry.onclick = () => {
       if (history.length) {
-        archives.unshift({
+        archivedChats.unshift({
+          id:Date.now(),
           date:new Date().toLocaleString(),
           messages:[...history]
         });
       }
+
       history = [...item.messages];
-      archives.splice(index + 1,1);
-      persist();
+      archivedChats = archivedChats.filter(x => x.id !== item.id);
+      saveAll();
       renderChat();
-      closePanel("historyOverlay");
-      statusEl.textContent = "Chat restored ✦";
+      closeHistory();
+      statusText.textContent = "Chat restored";
     };
-    list.appendChild(el);
+
+    list.appendChild(entry);
   });
 
   document.getElementById("historyOverlay").classList.add("open");
 }
 
 function openSettings() {
-  document.getElementById("nameInput").value = settings.name;
-  document.getElementById("languageInput").value = settings.language;
-  document.getElementById("micInput").checked = settings.mic;
-  document.getElementById("voiceInput").checked = settings.voice;
+  document.getElementById("userName").value = settings.name;
+  document.getElementById("languageMode").value = settings.language;
+  document.getElementById("micEnabled").checked = settings.mic;
+  document.getElementById("voiceEnabled").checked = settings.voice;
   document.getElementById("settingsOverlay").classList.add("open");
 }
 
-function saveSettings() {
-  settings.name = document.getElementById("nameInput").value.trim();
-  settings.language = document.getElementById("languageInput").value;
-  settings.mic = document.getElementById("micInput").checked;
-  settings.voice = document.getElementById("voiceInput").checked;
-  persist();
-  closePanel("settingsOverlay");
-  statusEl.textContent = "Settings saved ✦";
+function closeSettings() {
+  document.getElementById("settingsOverlay").classList.remove("open");
 }
-
-function closePanel(id) {
-  document.getElementById(id).classList.remove("open");
+function closeHistory() {
+  document.getElementById("historyOverlay").classList.remove("open");
 }
-
 function outsideClose(event,id) {
-  if (event.target.id === id) closePanel(id);
+  if (event.target.id === id) {
+    document.getElementById(id).classList.remove("open");
+  }
+}
+
+function saveSettings() {
+  settings.name = document.getElementById("userName").value.trim().slice(0,30);
+  settings.language = document.getElementById("languageMode").value;
+  settings.mic = document.getElementById("micEnabled").checked;
+  settings.voice = document.getElementById("voiceEnabled").checked;
+  saveAll();
+  closeSettings();
+  statusText.textContent = "Settings saved ✨";
 }
 
 function speechLanguage() {
@@ -576,15 +619,15 @@ function speechLanguage() {
 }
 
 function speak(text) {
-  if (!window.speechSynthesis) return;
-
+  if (!("speechSynthesis" in window)) return;
   window.speechSynthesis.cancel();
+
   const utterance = new SpeechSynthesisUtterance(text);
   const tamil = /[\u0B80-\u0BFF]/.test(text);
 
-  utterance.lang = settings.language === "auto"
-    ? (tamil ? "ta-IN" : "en-IN")
-    : settings.language;
+  if (settings.language === "ta-IN") utterance.lang = "ta-IN";
+  else if (settings.language === "en-IN") utterance.lang = "en-IN";
+  else utterance.lang = tamil ? "ta-IN" : "en-IN";
 
   utterance.rate = 1;
   utterance.pitch = 1.05;
@@ -593,15 +636,14 @@ function speak(text) {
 
 function toggleMic() {
   if (!settings.mic) {
-    statusEl.textContent = "Enable microphone in Settings first.";
+    statusText.textContent = "Enable microphone in Settings";
     return;
   }
 
-  const SpeechRecognition =
-    window.SpeechRecognition || window.webkitSpeechRecognition;
+  const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
   if (!SpeechRecognition) {
-    statusEl.textContent = "Voice input is not supported in this browser.";
+    statusText.textContent = "Voice input is not supported in this browser";
     return;
   }
 
@@ -617,45 +659,43 @@ function toggleMic() {
 
   recognition.onstart = () => {
     listening = true;
-    document.getElementById("micBtn").textContent = "⏹";
-    statusEl.textContent = "Listening...";
+    document.getElementById("micButton").textContent = "⏹";
+    statusText.textContent = "Listening...";
   };
 
   recognition.onresult = event => {
-    input.value = event.results[0][0].transcript;
+    messageInput.value = event.results[0][0].transcript;
     sendMessage();
   };
 
   recognition.onerror = () => {
-    statusEl.textContent = "Microphone error. Check browser permission.";
+    statusText.textContent = "Microphone error. Check permission.";
   };
 
   recognition.onend = () => {
     listening = false;
     recognition = null;
-    document.getElementById("micBtn").textContent = "🎙";
+    document.getElementById("micButton").textContent = "🎙";
   };
 
   try {
     recognition.start();
-  } catch(e) {
-    statusEl.textContent = "Please try the microphone again.";
+  } catch(error) {
+    statusText.textContent = "Please try again";
   }
 }
 
-input.addEventListener("keydown",event => {
+messageInput.addEventListener("keydown",event => {
   if (event.key === "Enter" && !event.shiftKey) {
     event.preventDefault();
     sendMessage();
   }
 });
 
-document.getElementById("micBtn").textContent = settings.mic ? "🎙" : "🔒";
-
 renderChat();
 
 if (settings.name) {
-  statusEl.textContent = "Welcome back, " + settings.name + " ✦";
+  statusText.textContent = "Welcome back, " + settings.name + " ✨";
 }
 </script>
 </body>
