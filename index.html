@@ -103,6 +103,7 @@ button {
   <h2>✨ YUKI AI</h2>
   <p>Your Personal AI Assistant</p>
   <button id="newChat" onclick="newChat()">+ New Chat</button>
+  <button id="historyBtn" onclick="showHistory()">📚 Chat History</button>
 </header>
 
 <div id="chat">
@@ -271,6 +272,41 @@ function speakReply(text) {
   addMessage("Hello! I'm YUKI AI. How can I help you?", "bot");
   statusText.textContent = "Ready";
 }
+  function showHistory() {
+  const chats = JSON.parse(
+    localStorage.getItem("yukiArchivedChats") || "[]"
+  );
+
+  if (chats.length === 0) {
+    alert("No old chats found!");
+    return;
+  }
+
+  const options = chats.map((item, index) =>
+    `${index + 1}. ${item.date}`
+  ).join("\n");
+
+  const choice = prompt(
+    "Choose a chat number:\n" + options
+  );
+
+  const number = Number(choice);
+
+  if (!Number.isInteger(number) || number < 1 || number > chats.length) {
+    return;
+  }
+
+  chat.innerHTML = "";
+
+  chats[number - 1].messages.forEach(item => {
+    addMessage(
+      item.content,
+      item.role === "user" ? "user" : "bot"
+    );
+  });
+
+  statusText.textContent = "Viewing old chat";
+  }
 </script>
 
 </body>
