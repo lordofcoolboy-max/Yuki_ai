@@ -229,6 +229,24 @@ function speakReply(text) {
   speech.lang = "ta-IN";
   window.speechSynthesis.speak(speech);
 }
+  window.addEventListener("load", function () {
+  const history = JSON.parse(
+    localStorage.getItem("yukiHistory") || "[]"
+  );
+
+  history.forEach(function (item) {
+    if (
+      item &&
+      ["user", "assistant"].includes(item.role) &&
+      typeof item.content === "string"
+    ) {
+      addMessage(
+        item.content,
+        item.role === "user" ? "user" : "bot"
+      );
+    }
+  });
+});
 </script>
 
 </body>
